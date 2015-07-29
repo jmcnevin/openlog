@@ -2,6 +2,7 @@ defmodule Openlog.LogController do
   use Openlog.Web, :controller
 
   alias Openlog.Log
+  alias Openlog.Message
 
   plug :scrub_params, "log" when action in [:create, :update]
 
@@ -31,7 +32,11 @@ defmodule Openlog.LogController do
 
   def show(conn, %{"id" => id}) do
     log = Repo.get!(Log, id)
-    render(conn, "show.html", log: log)
+    messages = Repo.all from m in Message,
+                 where: m.log_id == ^id,
+                 limit: 50,
+                 order_by: [asc: m.occurred_at]
+    render(conn, "show.html", log: log, messages: messages)
   end
 
   def edit(conn, %{"id" => id}) do

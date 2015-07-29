@@ -27,8 +27,4 @@ defmodule Openlog.Router do
       end
     end
   end
-
-  socket "/ws", Openlog do
-    channel "logs:*", LogChannel
-  end
 end

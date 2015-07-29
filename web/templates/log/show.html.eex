@@ -1,12 +1,16 @@
-<h2>Show log</h2>
+<h2>
+  <%= @log.name %>
+  <small><%= link "Back", to: log_path(@conn, :index) %></small>
+</h2>
 
-<ul>
 
-  <li>
-    <strong>Name:</strong>
-    <%= @log.name %>
-  </li>
-
-</ul>
-
-<%= link "Back", to: log_path(@conn, :index) %>
+<div id="messages" data-log-id="<%= @log.id %>">
+  <%= for message <- @messages do %>
+    <div class="message">
+      <div class="message-timestamp">
+        <%= message.occurred_at %>
+      </div>
+      <%= message.body %>
+    </div>
+  <% end %>
+</div>

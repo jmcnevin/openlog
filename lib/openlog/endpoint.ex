@@ -1,6 +1,8 @@
 defmodule Openlog.Endpoint do
   use Phoenix.Endpoint, otp_app: :openlog
 
+  socket "/ws", Openlog.UserSocket
+
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phoenix.digest
@@ -12,6 +14,7 @@ defmodule Openlog.Endpoint do
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
+    socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
     plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
   end
@@ -32,5 +35,5 @@ defmodule Openlog.Endpoint do
     key: "_openlog_key",
     signing_salt: "NXI5lQUj"
 
-  plug :router, Openlog.Router
+  plug Openlog.Router
 end

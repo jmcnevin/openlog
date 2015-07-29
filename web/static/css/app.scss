@@ -78,3 +78,19 @@ form.link, form.button {
     border-bottom: 0;
   }
 }
+
+#messages {
+  height: 300px;
+  overflow: scroll;
+  background-color: #EEE;
+  font-family: "Andale Mono", monospace;
+  padding: 10px;
+
+  .message {
+    margin-bottom: 20px;
+
+    .message-timestamp {
+      font-weight: bold;
+    }
+  }
+}
